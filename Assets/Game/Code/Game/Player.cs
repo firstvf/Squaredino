@@ -1,3 +1,4 @@
+using Assets.Game.Code.Data;
 using Assets.Game.Code.Static;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,7 @@ namespace Assets.Game.Code.Game
     public class Player : MonoBehaviour
     {
         [SerializeField] private Transform _model;
+        [SerializeField] private PlayerParams _params;
         public bool IsAiming { get; private set; }
         private Animator _animator;
         private NavMeshAgent _agent;
@@ -26,6 +28,9 @@ namespace Assets.Game.Code.Game
         {
             Observer.Instance.OnReadyRunHandler += SetMovement;
             Observer.Instance.OnReadyAimHandler += SetAim;
+            _agent.angularSpeed = _params.RotationSpeed;
+            _agent.speed = _params.Speed;
+            _agent.acceleration = _params.Acceleration;
         }
 
         private void Update()

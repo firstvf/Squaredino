@@ -1240,6 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a84742696338894e80852baa1840608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _params: {fileID: 11400000, guid: a98d66685881c5141a32f8f1b1734a31, type: 2}
   _ragdollComponents:
   - {fileID: 1326426954084176204}
   - {fileID: 3993532819538243048}
@@ -1254,7 +1255,6 @@ MonoBehaviour:
   - {fileID: 1210480940924874575}
   _animator: {fileID: 1792519955722470976}
   _collider: {fileID: 4327595877777669357}
-  _maxHealth: 100
 --- !u!136 &4327595877777669357
 CapsuleCollider:
   m_ObjectHideFlags: 0

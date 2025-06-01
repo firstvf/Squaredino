@@ -1,25 +1,25 @@
-﻿using Assets.Game.Code.Game.Level;
+﻿using Assets.Game.Code.Data;
+using Assets.Game.Code.Game.Level;
 using UnityEngine;
 
 namespace Assets.Game.Code.Game
 {
     public class Enemy : MonoBehaviour
     {
+        [SerializeField] private EnemyParams _params;
         [SerializeField] private Rigidbody[] _ragdollComponents;
         [SerializeField] private Animator _animator;
         [SerializeField] private Collider _collider;
-        [SerializeField] private int _maxHealth = 100;
+        private int _maxHealth;
         private int _currentHealth;
         private ControlPoint _controlPoint;
         private HealthBar _healthBar;
 
-        private void Awake()
-        {
-            _healthBar = GetComponent<HealthBar>();
-        }
+        private void Awake() => _healthBar = GetComponent<HealthBar>();
 
         private void Start()
         {
+            _maxHealth = _params.Health;
             _currentHealth = _maxHealth;
             _healthBar.RegisterHealthBar(_maxHealth);
             _controlPoint = GetComponentInParent<ControlPoint>();
@@ -52,7 +52,7 @@ namespace Assets.Game.Code.Game
             for (int i = 0; i < _ragdollComponents.Length; i++)
             {
                 _ragdollComponents[i].isKinematic = false;
-                _ragdollComponents[i].AddForce(hitDirection.normalized * 20f, ForceMode.Impulse);                
+                _ragdollComponents[i].AddForce(hitDirection.normalized * 20f, ForceMode.Impulse);
             }
         }
     }

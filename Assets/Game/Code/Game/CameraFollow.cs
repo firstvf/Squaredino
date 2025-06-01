@@ -1,4 +1,6 @@
-﻿using Assets.Game.Code.Static;
+﻿using Assets.Game.Code.Data;
+using Assets.Game.Code.Static;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Assets.Game.Code.Game
@@ -6,10 +8,7 @@ namespace Assets.Game.Code.Game
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform _target;
-        [SerializeField] private float _height = 3f;
-        [SerializeField] private float _distance = 6f;
-        [SerializeField] private float _rotationLagSpeed = 5f;
-        [SerializeField] private float _positionSmoothSpeed = 0.1f;
+        [SerializeField] private CameraParams _params;
         private Vector3 _currentVelocity;
         private float _currentYaw;
         private bool _isAbleToFollowTarget;
@@ -21,12 +20,19 @@ namespace Assets.Game.Code.Game
         {
             Observer.Instance.OnReadyAimHandler += DisableFollow;
             Observer.Instance.OnReadyRunHandler += EnableFollow;
+            Observer.Instance.OnWeaponShotHandler += Shake;
         }
 
         private void LateUpdate() => MoveCamera();
 
         private void EnableFollow() => _isAbleToFollowTarget = true;
         private void DisableFollow() => _isAbleToFollowTarget = false;
+
+        private void Shake(Vector3 direcion)
+        {
+            if (_params.CameraShake)
+                _camera.transform.DOShakePosition(0.1f, strength: 0.1f);
+        }
 
         private void MoveCamera()
         {
@@ -35,18 +41,19 @@ namespace Assets.Game.Code.Game
 
             float targetYaw = _target.eulerAngles.y;
 
-            _currentYaw = Mathf.LerpAngle(_currentYaw, targetYaw, Time.deltaTime * _rotationLagSpeed);
-            Vector3 offset = Quaternion.Euler(0f, _currentYaw, 0f) * new Vector3(0f, 0f, -_distance);
-            Vector3 desiredPosition = _target.position + offset + Vector3.up * _height;
+            _currentYaw = Mathf.LerpAngle(_currentYaw, targetYaw, Time.deltaTime * _params.RotationLagSpeed);
+            Vector3 offset = Quaternion.Euler(0f, _currentYaw, 0f) * new Vector3(0f, 0f, -_params.Distance);
+            Vector3 desiredPosition = _target.position + offset + Vector3.up * _params.Height;
 
-            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, desiredPosition, ref _currentVelocity, _positionSmoothSpeed);
-            _camera.transform.LookAt(_target.position + _height * 0.5f * Vector3.up);
+            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, desiredPosition, ref _currentVelocity, _params.PositionSmoothSpeed);
+            _camera.transform.LookAt(_target.position + _params.Height * 0.5f * Vector3.up);
         }
 
         private void OnDestroy()
         {
             Observer.Instance.OnReadyAimHandler -= DisableFollow;
             Observer.Instance.OnReadyRunHandler -= EnableFollow;
+            Observer.Instance.OnWeaponShotHandler -= Shake;
         }
     }
 }

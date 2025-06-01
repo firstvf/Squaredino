@@ -1,4 +1,5 @@
-﻿using Assets.Game.Code.Static;
+﻿using Assets.Game.Code.Game.Props;
+using Assets.Game.Code.Static;
 using Assets.Game.Code.Utils;
 using UnityEngine;
 
@@ -29,7 +30,6 @@ namespace Assets.Game.Code.Game
             if (_player.IsAiming && Input.GetMouseButtonDown(0))
             {
                 ShootAtTouch();
-                //RayVariant();
             }
         }
 

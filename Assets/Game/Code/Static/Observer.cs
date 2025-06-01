@@ -1,4 +1,4 @@
-﻿using Assets.Game.Code.Game;
+﻿using Assets.Game.Code.Game.Level;
 using System;
 using UnityEngine;
 
@@ -12,8 +12,8 @@ namespace Assets.Game.Code.Static
         public Action OnReadyRunHandler { get; set; }
         public Action OnReadyAimHandler { get; set; }
         public Action<Vector3> OnWeaponShotHandler { get; set; }
-        public Action<Vector3,Vector3> OnEnemyHitHandler { get; set; }
-
+        public Action<Vector3, Vector3> OnEnemyHitHandler { get; set; }
+        public Action OnPathCompleteHandler { get; set; }
 
         private void Awake()
         {

@@ -3,7 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Game.Code.Game
+namespace Assets.Game.Code.Game.Level
 {
     public class ControlPoint : MonoBehaviour
     {
@@ -13,7 +13,11 @@ namespace Assets.Game.Code.Game
 
         private void Start() => AnimatePointer();
 
-        public void AddEnemyToPoint(Enemy enemy) => _enemyList.Add(enemy);
+        public void AddEnemyToPoint(Enemy enemy)
+        {
+            if (_enemyList.Contains(enemy) == false)
+                _enemyList.Add(enemy);
+        }
 
         public void RemoveEnemyFromPoint(Enemy enemy)
         {
@@ -37,6 +41,11 @@ namespace Assets.Game.Code.Game
             _pointerTween = _pointer.transform.DOLocalMoveY(1, 1f)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Yoyo);
+        }
+
+        private void OnDestroy()
+        {
+            _pointerTween.Kill();
         }
     }
 }

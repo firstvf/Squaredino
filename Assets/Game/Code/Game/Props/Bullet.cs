@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Game.Code.Game
+namespace Assets.Game.Code.Game.Props
 {
     public class Bullet : MonoBehaviour
     {

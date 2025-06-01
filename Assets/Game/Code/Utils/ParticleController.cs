@@ -17,7 +17,7 @@ namespace Assets.Game.Code.Utils
 
         private void PlayBloodParticle(Vector3 at, Vector3 direction)
         {
-            _bloodParticle.transform.DORotate(direction, 0f);
+            _bloodParticle.transform.DORotate(direction.normalized, 0f);
             PlayParticle(_bloodParticle, at);
         }
 

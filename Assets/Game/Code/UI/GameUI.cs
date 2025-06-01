@@ -1,34 +1,37 @@
 ﻿using Assets.Game.Code.Static;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Game.Code.UI
 {
     public class GameUI : MonoBehaviour
     {
-        [SerializeField] private Button _continueRunButton;
-        [SerializeField] private GameObject _continueRunScreen;
+        [SerializeField] private TextMeshProUGUI _infoWindowText;
+        [SerializeField] private Button _button;
+        [SerializeField] private GameObject _infoWindow;
 
         private void Start()
         {
-            _continueRunButton.onClick.AddListener(() => RunButtonAction());
-            Observer.Instance.OnReadyAimHandler += AimScreen;
+            _button.onClick.AddListener(() => RunButtonAction());
+            Observer.Instance.OnPathCompleteHandler += EnableInfoWindow;
         }
 
-        private void AimScreen()
-        {
-
-        }
+        private void EnableInfoWindow() => _infoWindow.SetActive(true);
+        private void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         private void RunButtonAction()
         {
             Observer.Instance.OnReadyRunHandler?.Invoke();
-            _continueRunScreen.SetActive(false);
+            _infoWindow.SetActive(false);
+            _button.onClick.AddListener(() => Restart());
+            _infoWindowText.text = "TAP TO RESTART GAME";
         }
 
         private void OnDestroy()
         {
-            Observer.Instance.OnReadyAimHandler -= AimScreen;
+            Observer.Instance.OnPathCompleteHandler -= EnableInfoWindow;
         }
     }
 }

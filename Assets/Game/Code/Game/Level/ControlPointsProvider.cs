@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Game.Code.Game
+namespace Assets.Game.Code.Game.Level
 {
     public class ControlPointsProvider : MonoBehaviour
     {
@@ -31,6 +31,7 @@ namespace Assets.Game.Code.Game
                 Debug.Log("Player reached last position");
                 _currentPointId--;
                 Observer.Instance.OnMoventPointReachedHandler -= VerifyPointStatus;
+                Observer.Instance.OnPathCompleteHandler?.Invoke();
             }
 
             return _points[_currentPointId].transform.position;

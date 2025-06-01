@@ -1,15 +1,12 @@
-﻿using Assets.Game.Code.Game;
+﻿using Assets.Game.Code.Game.Level;
 using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Game.Code.Editor
 {
-
     [CustomEditor(typeof(ControlPoint))]
     public class ControlPointEditor : UnityEditor.Editor
     {
-        [SerializeField] private Enemy _enemy;
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -22,29 +19,20 @@ namespace Assets.Game.Code.Editor
             }
         }
 
-        private void CreateAndAddEnemy(ControlPoint checkpoint)
+        private void CreateAndAddEnemy(ControlPoint controlPoint)
         {
-            GameObject enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemy.prefab");
+            var enemyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Game/Prefabs/Bot.prefab");
+
             if (enemyPrefab == null)
             {
-                Debug.LogError("Enemy prefab not found at Assets/Prefabs/Enemy.prefab");
+                Debug.LogError("No enemy prefab at path\tAssets/Game/Prefabs/Bot.prefab");
                 return;
             }
 
-            GameObject enemyInstance = (GameObject)PrefabUtility.InstantiatePrefab(enemyPrefab);
-            enemyInstance.transform.position = checkpoint.transform.position;
-
-            Enemy enemyComponent = enemyInstance.GetComponent<Enemy>();
-            if (enemyComponent != null)
-            {
-                Undo.RecordObject(checkpoint, "Add Enemy");
-              //  checkpoint.AddEnemy(enemyComponent);
-                EditorUtility.SetDirty(checkpoint);
-            }
-            else
-            {
-                Debug.LogError("Enemy prefab does not have an Enemy component");
-            }
+            var enemyInstance = (GameObject)PrefabUtility.InstantiatePrefab(enemyPrefab, controlPoint.transform);
+            enemyInstance.transform.position = controlPoint.transform.position;
+            Undo.RecordObject(controlPoint, "Add Enemy");
+            EditorUtility.SetDirty(controlPoint);
         }
     }
 }

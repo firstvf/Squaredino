@@ -22,7 +22,6 @@ namespace Assets.Game.Code.Game.Level
 
             if (_currentPointId >= _points.Count)
             {
-                Debug.Log("Player reached last position");
                 _currentPointId--;
                 Observer.Instance.OnMoventPointReachedHandler -= VerifyPointStatus;
                 Observer.Instance.OnPathCompleteHandler?.Invoke();

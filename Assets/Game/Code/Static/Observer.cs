@@ -16,7 +16,7 @@ namespace Assets.Game.Code.Static
         public Action<Vector3, Vector3> OnEnemyHitHandler { get; set; }
         public Action OnPathCompleteHandler { get; set; }
         public Action<Vector3> OnTouchAimWindowHandler { get; set; }
-        [field: SerializeField] public AimWindowSettings AimWindowSettings { get; private set; }
+        public AimWindowSettings AimWindowSettings { get; private set; }
         [field: SerializeField] public Player Player { get; private set; }
         [field: SerializeField] public Transform BulletsContainer { get; private set; }
 
@@ -24,6 +24,7 @@ namespace Assets.Game.Code.Static
         {
             Init();
             MovementProvider = GetComponent<ControlPointsProvider>();
+            AimWindowSettings = GetComponent<AimWindowSettings>();
         }
 
         private void Init()

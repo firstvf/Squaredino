@@ -1,4 +1,5 @@
-﻿using Assets.Game.Code.Game.Level;
+﻿using Assets.Game.Code.Game;
+using Assets.Game.Code.Game.Level;
 using System;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ namespace Assets.Game.Code.Static
         public Action<Vector3> OnWeaponShotHandler { get; set; }
         public Action<Vector3, Vector3> OnEnemyHitHandler { get; set; }
         public Action OnPathCompleteHandler { get; set; }
+        public Action<Vector3> OnTouchAimWindowHandler { get; set; }
+        [field: SerializeField] public AimWindowSettings AimWindowSettings { get; private set; }
+        [field: SerializeField] public Player Player { get; private set; }
+        [field: SerializeField] public Transform BulletsContainer { get; private set; }
 
         private void Awake()
         {

@@ -10,15 +10,9 @@ namespace Assets.Game.Code.Game.Level
         private int _currentPointId = 0;
         private bool _isFirstPointGet;
 
-        private void Start()
-        {
-            Observer.Instance.OnMoventPointReachedHandler += VerifyPointStatus;
-        }
+        private void Start() => Observer.Instance.OnMoventPointReachedHandler += VerifyPointStatus;
 
-        private void VerifyPointStatus()
-        {
-            _points[_currentPointId].VerifyPointStatus();
-        }
+        private void VerifyPointStatus() => _points[_currentPointId].VerifyPointStatus();
 
         public Vector3 GetMovementPosition()
         {

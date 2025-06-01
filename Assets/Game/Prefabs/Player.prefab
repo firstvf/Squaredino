@@ -1243,6 +1243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512869d48373ba0418f062879da1ce86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShotPoint>k__BackingField: {fileID: 6562859178467343149}
   _model: {fileID: 2912569803154711033}
   _params: {fileID: 11400000, guid: 835c0aade3ee1394c882a188956c255b, type: 2}
 --- !u!114 &2040340514306986922

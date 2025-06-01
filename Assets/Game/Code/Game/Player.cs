@@ -7,9 +7,11 @@ namespace Assets.Game.Code.Game
 {
     public class Player : MonoBehaviour
     {
+        [field: SerializeField] public Transform ShotPoint { get; private set; }
+        public bool IsAiming { get; private set; }
+
         [SerializeField] private Transform _model;
         [SerializeField] private PlayerParams _params;
-        public bool IsAiming { get; private set; }
         private Animator _animator;
         private NavMeshAgent _agent;
         private bool _isRunning;

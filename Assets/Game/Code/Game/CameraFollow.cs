@@ -7,8 +7,8 @@ namespace Assets.Game.Code.Game
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform _target;
         [SerializeField] private CameraParams _params;
+        private Transform _target;
         private Vector3 _currentVelocity;
         private float _currentYaw;
         private bool _isAbleToFollowTarget;
@@ -18,6 +18,7 @@ namespace Assets.Game.Code.Game
 
         private void Start()
         {
+            _target = Observer.Instance.Player.transform;
             Observer.Instance.OnReadyAimHandler += DisableFollow;
             Observer.Instance.OnReadyRunHandler += EnableFollow;
             Observer.Instance.OnWeaponShotHandler += Shake;

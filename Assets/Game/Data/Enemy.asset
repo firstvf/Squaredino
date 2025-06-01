@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505c4e3bdbd19a74ea2aeccb84e25540, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 0
+  <Health>k__BackingField: 100

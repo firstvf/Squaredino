@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Casual_gun
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 35
-  <MinDamage>k__BackingField: 7
-  <MaxDamage>k__BackingField: 20
-  <Lifetime>k__BackingField: 5
+  <MinDamage>k__BackingField: 15
+  <MaxDamage>k__BackingField: 30
   <MaxDistance>k__BackingField: 20

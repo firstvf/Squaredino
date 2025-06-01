@@ -11,13 +11,18 @@ namespace Assets.Game.Code.UI
         [SerializeField] private TextMeshProUGUI _infoWindowText;
         [SerializeField] private Button _button;
         [SerializeField] private GameObject _infoWindow;
+        [SerializeField] private Image _aimScreen;
 
         private void Start()
         {
             _button.onClick.AddListener(() => RunButtonAction());
             Observer.Instance.OnPathCompleteHandler += EnableInfoWindow;
+            Observer.Instance.OnReadyAimHandler += EnableAimScreen;
+            Observer.Instance.OnReadyRunHandler += DisableAimScreen;
         }
 
+        private void EnableAimScreen() => _aimScreen.gameObject.SetActive(true);
+        private void DisableAimScreen() => _aimScreen.gameObject.SetActive(false);
         private void EnableInfoWindow() => _infoWindow.SetActive(true);
         private void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
@@ -32,6 +37,8 @@ namespace Assets.Game.Code.UI
         private void OnDestroy()
         {
             Observer.Instance.OnPathCompleteHandler -= EnableInfoWindow;
+            Observer.Instance.OnReadyAimHandler -= EnableAimScreen;
+            Observer.Instance.OnReadyRunHandler -= DisableAimScreen;
         }
     }
 }

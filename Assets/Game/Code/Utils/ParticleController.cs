@@ -8,12 +8,13 @@ namespace Assets.Game.Code.Utils
     {
         [SerializeField] private ParticleSystem _shotParticle, _bloodParticle;
 
-
         private void Start()
         {
             Observer.Instance.OnWeaponShotHandler += PlayShotParticle;
             Observer.Instance.OnEnemyHitHandler += PlayBloodParticle;
         }
+
+        private void PlayShotParticle(Vector3 at) => PlayParticle(_shotParticle, at);
 
         private void PlayBloodParticle(Vector3 at, Vector3 direction)
         {
@@ -26,11 +27,6 @@ namespace Assets.Game.Code.Utils
             particle.transform.position = at;
             particle.gameObject.SetActive(true);
             particle.Play();
-        }
-
-        private void PlayShotParticle(Vector3 at)
-        {
-            PlayParticle(_shotParticle, at);
         }
 
         private void OnDestroy()

@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 6929291855226163264}
   - component: {fileID: 8758175271049414142}
   m_Layer: 6
-  m_Name: MovementPoint
+  m_Name: ControlPoint
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

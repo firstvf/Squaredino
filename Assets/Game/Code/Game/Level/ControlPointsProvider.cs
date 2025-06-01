@@ -34,6 +34,11 @@ namespace Assets.Game.Code.Game.Level
                 Observer.Instance.OnPathCompleteHandler?.Invoke();
             }
 
+            foreach (var point in _points)
+                point.SwitchCurrentPoint(false);
+
+            _points[_currentPointId].SwitchCurrentPoint(true);
+
             return _points[_currentPointId].transform.position;
         }
     }

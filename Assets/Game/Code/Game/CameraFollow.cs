@@ -13,6 +13,9 @@ namespace Assets.Game.Code.Game
         private Vector3 _currentVelocity;
         private float _currentYaw;
         private bool _isAbleToFollowTarget;
+        private Camera _camera;
+
+        private void Awake() => _camera = Camera.main;
 
         private void Start()
         {
@@ -36,8 +39,8 @@ namespace Assets.Game.Code.Game
             Vector3 offset = Quaternion.Euler(0f, _currentYaw, 0f) * new Vector3(0f, 0f, -_distance);
             Vector3 desiredPosition = _target.position + offset + Vector3.up * _height;
 
-            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref _currentVelocity, _positionSmoothSpeed);
-            transform.LookAt(_target.position + Vector3.up * _height * 0.5f);
+            _camera.transform.position = Vector3.SmoothDamp(_camera.transform.position, desiredPosition, ref _currentVelocity, _positionSmoothSpeed);
+            _camera.transform.LookAt(_target.position + _height * 0.5f * Vector3.up);
         }
 
         private void OnDestroy()

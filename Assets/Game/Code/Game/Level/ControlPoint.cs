@@ -10,8 +10,11 @@ namespace Assets.Game.Code.Game.Level
         [SerializeField] private GameObject _pointer;
         private readonly List<Enemy> _enemyList = new();
         private Tween _pointerTween;
+        private bool _isCurrentPoint;
 
         private void Start() => AnimatePointer();
+
+        public void SwitchCurrentPoint(bool isCurrentPoint) => _isCurrentPoint = isCurrentPoint;
 
         public void AddEnemyToPoint(Enemy enemy)
         {
@@ -23,11 +26,9 @@ namespace Assets.Game.Code.Game.Level
         {
             _enemyList.Remove(enemy);
 
-            if (_enemyList.Count <= 0)
+            if (_enemyList.Count <= 0 && _isCurrentPoint)
                 Invoke(nameof(CallActionDelay), 0.5f);
         }
-
-        private void CallActionDelay() => Observer.Instance.OnReadyRunHandler?.Invoke();
 
         public void VerifyPointStatus()
         {
@@ -35,6 +36,8 @@ namespace Assets.Game.Code.Game.Level
                 Observer.Instance.OnReadyRunHandler?.Invoke();
             else Observer.Instance.OnReadyAimHandler?.Invoke();
         }
+
+        private void CallActionDelay() => Observer.Instance.OnReadyRunHandler?.Invoke();
 
         private void AnimatePointer()
         {

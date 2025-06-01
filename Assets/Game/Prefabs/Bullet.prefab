@@ -47,10 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae178873c9a484f45990718b6a20696c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 15
-  _lifeTime: 1
-  _minDamage: 4
-  _maxDamage: 25
+  _params: {fileID: 11400000, guid: 81632aa25ff1572418b076c8d740a380, type: 2}
 --- !u!135 &8619958438909599304
 SphereCollider:
   m_ObjectHideFlags: 0
